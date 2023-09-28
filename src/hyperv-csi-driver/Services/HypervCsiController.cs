@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using csi;
+using Csi.V1;
 using Grpc.Core;
 using HypervCsiDriver.Infrastructure;
 using HypervCsiDriver.Infrastructure.Hyperv.VirtualMachine;
@@ -294,7 +294,7 @@ public sealed class HypervCsiController : Controller.ControllerBase
         if (!Guid.TryParse(request.NodeId, out var vmId))
             throw new RpcException(new Status(StatusCode.InvalidArgument, "node id invalid"));
 
-        _logger.LogInformation("publich volume {VolumeName} on storage {StorageName} to node {VMId}", volumeName, storage, vmId);
+        _logger.LogInformation("publish volume {VolumeName} on storage {StorageName} to node {VMId}", volumeName, storage, vmId);
 
         var foundVolumes = await _service.GetVolumesAsync(new HypervVolumeFilter
             {
@@ -433,8 +433,9 @@ public sealed class HypervCsiController : Controller.ControllerBase
 
     public override async Task<ListVolumesResponse> ListVolumes(ListVolumesRequest request, ServerCallContext context)
     {
+        _logger.LogDebug($"ListVolumeRequest is: {request.StartingToken} Max entries: {request.MaxEntries}");
         var startIndex = 0;
-        _logger.LogDebug("list volumes from index {StartIndex}", request.StartingToken);
+        _logger.LogDebug($"list volumes from index {startIndex}, Staring Token: {request.StartingToken}");
 
         //todo cache query
             

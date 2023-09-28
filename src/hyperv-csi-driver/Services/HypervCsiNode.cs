@@ -1,11 +1,14 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using csi;
+using Csi.V1;
 using Grpc.Core;
 using HypervCsiDriver.Infrastructure.Hyperv.Node;
+
 using HypervCsiDriver.Utils;
 using Microsoft.Extensions.Logging;
+using HypervCsiDriver.Infrastructure.Hyperv.VolumeRequest;
+using HypervCsiDriver.Infrastructure.Hyperv.Volume;
 
 namespace HypervCsiDriver.Services
 {

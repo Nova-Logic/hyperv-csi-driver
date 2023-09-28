@@ -16,30 +16,6 @@ using HypervCsiDriver.Infrastructure.Hyperv.VolumeRequest;
 
 namespace HypervCsiDriver.Infrastructure
 {
-    public interface IHypervVolumeService
-    {
-        IAsyncEnumerable<HypervVolumeInfo> GetVolumesAsync(HypervVolumeFilter filter);
-
-        Task<HypervVolumeDetail> GetVolumeAsync(string path, CancellationToken cancellationToken = default);
-
-        Task<HypervVolumeDetail> GetVolumeAsync(string path, string? hostName, CancellationToken cancellationToken = default);
-
-        Task<HypervVolumeDetail> CreateVolumeAsync(HypervCreateVolumeRequest request, CancellationToken cancellationToken = default);
-
-        Task DeleteVolumeAsync(HypervDeleteVolumeRequest request, CancellationToken cancellationToken = default);
-
-        Task<HypervVirtualMachineVolumeInfo> AttachVolumeAsync(HypervAttachVolumeRequest request, CancellationToken cancellationToken = default);
-
-        Task DetachVolumeAsync(HypervDetachVolumeRequest request, CancellationToken cancellationToken = default);
-
-        IAsyncEnumerable<HypervVirtualMachineVolumeInfo> GetVirtualMachineVolumesAsync(Guid vmId, HypervVirtualMachineVolumeFilter filter);
-
-        IAsyncEnumerable<HypervVirtualMachineInfo> GetVirtualMachinesAsync(HypervVirtualMachineFilter filter, CancellationToken cancellationToken = default);
-        IAsyncEnumerable<HypervVolumeFlowInfo> GetVolumeFlowsAsnyc(HypervVolumeFlowFilter filter);
-
-        IAsyncEnumerable<HypervVolumeDetailResult> GetVolumeDetailsAsync(IEnumerable<HypervVolumeInfo> volumes, CancellationToken cancellationToken = default);
-    }
-
     public sealed class HypervVolumeService : IHypervVolumeService, IDisposable
     {
         readonly HypervCsiDriverOptions _options;
@@ -179,9 +155,10 @@ namespace HypervCsiDriver.Infrastructure
 
         public IAsyncEnumerable<HypervVolumeInfo> GetVolumesAsync(HypervVolumeFilter filter)
         {
-            _logger.LogInformation("GetVolumesAsync");
-          //  _logger.LogInformation(filter.ToString() );
-            _logger.LogInformation(_options.HostName);
+            _logger.LogInformation("In GetVolumesAsync");
+            
+              //  _logger.LogInformation($"Filter is: {filter} and Filter Storage is:{filter.Storage}" );
+            _logger.LogInformation($"GetVolumesAsync host is: {_options.HostName}");
             return GetHost(_options.HostName).GetVolumesAsync(filter);
         }
 

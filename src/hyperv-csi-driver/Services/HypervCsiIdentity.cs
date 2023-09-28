@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using csi;
+using Csi.V1;
 using Grpc.Core;
 using HypervCsiDriver.Hosting;
 using Microsoft.Extensions.Logging;
