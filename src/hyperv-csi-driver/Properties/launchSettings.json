@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "hyperv-csi-driver": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:5126"
+    }
+  }
+}
